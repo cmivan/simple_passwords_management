@@ -32,8 +32,8 @@ $(function(){
 <thead>
 <tr class="forumRaw edit_item_frist">
 <td>
-  <a class="btn btn-mini" href="<?php echo site_url('accounts')?>">返回帐号管理</a>
-  <a class="btn btn-mini btn-primary" href="<?php echo site_url('accounts/type_edit')?>"><span class="icon-plus-sign icon-white"></span> 添加<span class="red">帐号</span>类别</a></td>
+  <a class="btn btn-xs btn-primary" href="<?php echo site_url('accounts')?>">返回帐号管理</a>
+  <a class="btn btn-xs btn-primary" href="<?php echo site_url('accounts/type_edit')?>"><span class="icon-plus-sign icon-white"></span> 添加<span class="red">帐号</span>类别</a></td>
 <td width="60" align="center"><strong>批登录</strong></td>
 <td width="40" align="center"><strong>排序</strong></td>
 <td width="100" align="center" class="edit_box_edit_td"><strong>操作</strong></td></tr>
@@ -43,7 +43,7 @@ if(!empty($rs_type)){
 	foreach($rs_type as $rs){
 ?>
 <tr><td>
-<a href="<?php echo site_url('index/type_edit')?><?php echo reUrl('id='.$rs->t_id)?>" class="btn btn-mini btn-success">
+<a href="<?php echo site_url('index/type_edit')?><?php echo reUrl('id='.$rs->t_id)?>" class="btn btn-xs btn-success">
 <span class="icon-cog icon-white"></span>
 <?php echo $rs->t_title?><span>(<?php echo $rs->t_id?>)</span>
 </a>
@@ -52,7 +52,7 @@ if(!empty($rs_type)){
 </td>
   <td align="center">
 <?php if(!empty($rs->t_loginbox)){?>
-<a href="" class="btn btn-mini btn-danger"><span class="icon-ok-sign icon-white"></span></a>
+<a href="" class="btn btn-xs btn-danger"><span class="icon-ok-sign icon-white"></span></a>
 <?php }?>
 
   </td>
@@ -63,8 +63,8 @@ if(!empty($rs_type)){
 <img src="<?php echo site_url_fix('public/images/ico/down_ico','gif');?>" border="0" /></a>
 </td>
 <td align="center">
-<input type="button" class="btn btn-mini delete" url='<?php echo reUrl('del_id='.$rs->t_id)?>' title='<?php echo $rs->t_title;?>' value="删除" />
-<input type="button" class="btn btn-mini btn-info update" url='<?php echo site_url('accounts/type_edit')?><?php echo reUrl('id='.$rs->t_id)?>' value="修改"/>
+<input type="button" class="btn btn-xs delete" url='<?php echo reUrl('del_id='.$rs->t_id)?>' title='<?php echo $rs->t_title;?>' value="删除" />
+<input type="button" class="btn btn-xs btn-info update" url='<?php echo site_url('accounts/type_edit')?><?php echo reUrl('id='.$rs->t_id)?>' value="修改"/>
 </td>
 </tr>
 <?php }}?>

@@ -2,16 +2,16 @@
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Accounts extends HT_Controller {
-	
+
 	public $data;
-	
+
 	function __construct()
 	{
 		parent::__construct();
-		
+
 		//执行重新排序
 		$this->load->helper('publicedit');
-		
+
 		$this->data['rs_data']['id'] = '';
 		$this->data['rs_data']['title'] = '';
 		$this->data['rs_data']['siteUrl'] = '';
@@ -24,20 +24,20 @@ class Accounts extends HT_Controller {
 		$this->data['rs_data']['uid'] = $this->logid;
 		$this->data['rs_type'] = $this->Accounts_Model->get_types($this->logid);
 	}
-	
+
 
 
 	function index($type_id=0)
 	{
 		$this->load->library('Paging');
-		
+
 		//删除
 		$del_id = $this->input->getnum('del_id');
 		if( $del_id )
 		{
 			$this->Accounts_Model->del($del_id,$this->logid);
 		}
-		
+
 		//判断搜索
 		$keysword = $this->input->get_or_post('keysword',TRUE);
 		if($keysword!='')
@@ -54,7 +54,7 @@ class Accounts extends HT_Controller {
 		{
 			$this->db->where('type_id',$type_id);
 		}
-		
+
 		$this->data['keysword'] = $keysword;
 		$this->data['type_id'] = $type_id;
 
@@ -62,16 +62,16 @@ class Accounts extends HT_Controller {
 		$this->db->where('uid',$this->logid);
 		$this->db->order_by('id','desc');
 		$listsql = $this->db->getSQL();
-		
+
 		//读取列表
 		$this->data["accounts_list"] = $this->paging->show( $listsql ,15);
 
 		//输出到视窗
 		$this->load->view('accounts/manage',$this->data);
-	
+
 	}
-	
-	
+
+
 	function lists()
 	{
 		$this->db->from('accounts_type');
@@ -92,7 +92,7 @@ class Accounts extends HT_Controller {
 		//输出到视窗
 		$this->load->view('accounts/list',$this->data);
 	}
-	
+
 	function go2url($id='')
 	{
 		if( is_num($id) )
@@ -116,15 +116,15 @@ class Accounts extends HT_Controller {
 		}
 	}
 
-	
-	function edit($id='')
+
+	function edit($id=null)
 	{
 		$this->load->library('Kindeditor');
-		
+
 		/*表单配置*/
-		$this->data['formTO']->url = 'accounts/save';
-		$this->data['formTO']->backurl = '';
-		
+		$this->data['formTO']['url'] = 'accounts/save';
+		$this->data['formTO']['backurl'] = '';
+
 		if( is_num($id) )
 		{
 			//编辑
@@ -136,7 +136,7 @@ class Accounts extends HT_Controller {
 				foreach( $rs_data as $item => $val )
 				{
 					$this->data['rs_data'][$item] = $view->$item;
-				}	
+				}
 			}
 		}
 		else
@@ -147,8 +147,8 @@ class Accounts extends HT_Controller {
 		//输出到视窗
 		$this->load->view('accounts/edit',$this->data);
 	}
-	
-	
+
+
 	function save()
 	{
 		$rs_data = $this->data['rs_data'];
@@ -156,7 +156,7 @@ class Accounts extends HT_Controller {
 		{
 			$this->data['rs_data'][$item] = $this->input->post($item);
 		}
-		
+
 		$id = $this->data['rs_data']['id'];
 		$title = $this->data['rs_data']['title'];
 		$user = $this->data['rs_data']['user'];
@@ -173,9 +173,9 @@ class Accounts extends HT_Controller {
 		{
 			json_form_no('请先填登录密码!');
 		}
-		
+
 		$this->data['rs_data']['uid'] = $this->logid;
-		
+
 		if( is_num($id) )
 		{
 			$this->db->where('id',$id );
@@ -209,7 +209,7 @@ class Accounts extends HT_Controller {
 		{
 			$cmd = $this->input->post('cmd');
 			$type_id = $this->input->postnum('type_id');
-			
+
 			if($cmd=='')
 			{
 				json_form_no('未知操作!');
@@ -218,7 +218,7 @@ class Accounts extends HT_Controller {
 			{
 				json_form_no('参数丢失,本次操作无效!');
 			}
-			
+
 			$row = $this->Accounts_Model->get_type($type_id,$this->logid);
 			if(!empty($row))
 			{
@@ -232,22 +232,24 @@ class Accounts extends HT_Controller {
 					  'type' => $cmd
 					  );
 				List_Re_Order($keys);
-				}	
+				}
 		}
-		
+
 		//表单配置
-		$this->data['formTO']->url = 'accounts/type';
-		$this->data['formTO']->backurl = '';
-		
+		$formTO = array();
+		$formTO['url'] = 'accounts/type';
+		$formTO['backurl'] = '';
+		$this->data['formTO'] = $formTO;
+
 		//输出界面效果
 		$this->load->view('accounts/type_manage',$this->data);
 	}
-	
+
 	function type_edit()
 	{
 		//接收Url参数
 		$id = $this->input->getnum('id');
-		
+
 		//初始化数据
 		$this->data['t_id'] = $id;
 		$this->data['t_title'] = '';
@@ -269,15 +271,18 @@ class Accounts extends HT_Controller {
 				$this->data['t_order_id'] = $rs->t_order_id;
 			}
 		}
-		
+
 		//表单配置
-		$this->data['formTO']->url = 'accounts/type_save';
-		$this->data['formTO']->backurl = 'accounts/type';
-		
+		//表单配置
+		$formTO = array();
+		$formTO['url'] = 'accounts/type_save';
+		$formTO['backurl'] = 'accounts/type';
+		$this->data['formTO'] = $formTO;
+
 		$this->load->view('accounts/type_edit',$this->data);
 	}
-	
-	
+
+
 	//保存分类
 	function type_save()
 	{
@@ -296,13 +301,13 @@ class Accounts extends HT_Controller {
 		{
 			json_form_no('请在排序处填写正整数!');
 		}
-		
+
 		//写入数据
 		$data['t_title'] = $t_title;
 		$data['t_loginbox'] = $t_loginbox;
 		$data['t_order_id'] = $t_order_id;
 		$data['uid'] = $this->logid;
-		
+
 		if($id==false)
 		{
 			//添加
@@ -320,7 +325,7 @@ class Accounts extends HT_Controller {
 			//重洗分类排序
 			$this->re_order_type();
 			json_form_yes('修改成功!');
-		}	
+		}
 	}
 
 	//重洗分类排序

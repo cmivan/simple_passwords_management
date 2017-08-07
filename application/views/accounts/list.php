@@ -26,10 +26,10 @@ $(function(){
 <table width="100%" border="0" align=center cellpadding="0" cellspacing="0" class="well">
 <tr>
 <td>
-<a class="btn login_out" href="javascript:void(0);" url="<?php echo site_url('action/login_out')?>"><span class="icon-off"></span> 退出</a>
-<a class="btn btn-primary" href="<?php echo site_url('accounts')?>">返回帐号管理</a>
+<a class="btn btn-xs login_out" href="javascript:void(0);" url="<?php echo site_url('action/login_out')?>"><span class="icon-off"></span> 退出</a>
+<a class="btn btn-xs btn-primary" href="<?php echo site_url('accounts')?>">返回帐号管理</a>
 </td>
-<td align="right">
+<td align="right" style="padding:7px;" class="col-lg-2">
   <?php $this->load->view('public/public_search'); ?>
 </td></tr></table>
 

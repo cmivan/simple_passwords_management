@@ -1,12 +1,3 @@
-<?php
-//-=================================================-
-//-====  |       伊凡php建站系统 v1.0           | ====-
-//-====  |       Author : cm.ivan             | ====-
-//-====  |       QQ     : 394716221           | ====-
-//-====  |       Time   : 2011-04-02 11:00    | ====-
-//-====  |       For    : 齐翔广告             | ====-
-//-=================================================-
-?>
 <?php $this->load->view('public/header'); ?>
 <script type="text/javascript" src="<?php echo $js_url;?>validform/js/validform.js"></script>
 <link rel="stylesheet" type="text/css" href="<?php echo $js_url;?>validform/css/css.css" />
@@ -28,17 +19,37 @@ $(function(){
 </head>
 <body>
 
-<div class="well" style="width:220px; margin:auto; margin-top:40px;">
-<form class="validform" id="loginform" method="post">
-<label>登录帐号：</label>
-<input type="text" name="username" placeholder="请先填写登录帐号…" datatype="*" nullmsg="请填写帐号!" value="cm"/>
-<br><br>
-<label>登录密码：</label>
-<input type="password" name="password" datatype="*" nullmsg="请填写密码!"/>
-<br><br>
-<a href="<?php echo site_url('index/reg');?>" class="btn">注册</a>
-<input type="submit" class="btn btn-success" value="登录"/>
-</form>
+<div class="panel panel-info" style="width:320px; margin:auto; margin-top:40px;">
+  <div class="panel-heading">
+		<div class="panel panel-default">
+		  <div class="panel-body">
+
+				<form class="validform form-horizontal" id="loginform" method="post">
+				  <div class="form-group">
+				    <label class="col-sm-3 control-label">User</label>
+				    <div class="col-sm-9">
+				      <input class="form-control" type="text" name="username" placeholder="请先填写登录帐号…" datatype="*" nullmsg="请填写帐号!" value="cm"/>
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <label class="col-sm-3 control-label">Password</label>
+				    <div class="col-sm-9">
+				      <input class="form-control" type="password" name="password" placeholder="password…" datatype="*" nullmsg="请填写密码!" value=""/>
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <div class="col-sm-offset-3 col-sm-9">
+				      <button type="submit" class="btn btn-sm btn-primary">Sign in</button>
+				      <a href="<?php echo site_url('index/reg');?>" class="btn">注册</a>
+				    </div>
+				  </div>
+				</form>
+
+
+		  </div>
+		</div>
+  </div>
 </div>
+
 </body>
 </html>

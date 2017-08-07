@@ -101,8 +101,8 @@ class Paging {
 		//尾页效果
 		$config['last_link'] = '最后一页';
 		//当前页显示效果
-		$config['cur_tag_open'] = '<li class="active"><a>';
-		$config['cur_tag_close'] = '</a></li>';
+		$config['cur_tag_open'] = '<a class="btn btn-xs btn-primary">';
+		$config['cur_tag_close'] = '</li>';
 		//自定义上一页\下一页
 		$config['prev_link'] = '上一页';
 		$config['next_link'] = '下一页';  
@@ -110,6 +110,7 @@ class Paging {
 		$config['num_links'] = 3;
 		$config['query_string_segment'] = 'page';
 		$config['page_query_string'] = TRUE;
+		$config['anchor_class'] = 'class="btn btn-xs btn-default"';
 		//$config['anchor_class'] = "style='font-size:14px;' ";
 		return $config;
 	}
@@ -126,9 +127,10 @@ class Paging {
 	{
 		// 加载分页类
 		$this->CI->load->library('pagination');
-		
-		echo '<div class="pagination"><li class="active"><a>共有'.$this->CI->pagination->total_rows;
-		echo '条记录 / 每页显示'.$this->CI->pagination->per_page.'条信息</a></li>';
+		$page_config = $this->page_config(reUrl('page=null'), 15, $this->CI->pagination->total_rows); 
+		$this->CI->pagination->initialize($page_config);
+		echo '<div class="pagination"><a class="btn btn-xs">共有'.$this->CI->pagination->total_rows;
+		echo '条记录 / 每页显示'.$this->CI->pagination->per_page.'条信息</a>';
 		echo $this->CI->pagination->create_links().'</div>';
 	}
 

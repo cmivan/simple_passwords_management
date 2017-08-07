@@ -13,3 +13,27 @@
 <?php $this->load->view('public/validform'); ?>
 
 <link rel="stylesheet" href="<?php echo $css_url;?>../bootstrap/css/bootstrap.css" />
+<style>
+body {
+	font-size: 12px;
+}
+.nav-tabs {
+	font-size: 12px;
+}
+.manage .table {
+	background-color: #fff;
+	border-top: 0;
+}
+.well .table th,.well .table td{
+	padding: 3px;
+}
+
+.nav > li > a {
+  position: relative;
+  display: block;
+  padding: 5px 8px;
+}
+.form-control {
+	font-size: 12px;
+}
+</style>

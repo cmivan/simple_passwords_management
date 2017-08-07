@@ -9,7 +9,7 @@ function oneKey($user='',$pass='',$loginUrl='',$onekey='')
 		$loginBOX.= $onekey;
 		$loginBOX = str_replace('{user}',$user,$loginBOX);
 		$loginBOX = str_replace('{pass}',$pass,$loginBOX);
-		$loginBOX.= '<input type="submit" class="btn btn-mini btn-danger" value=" 登录 " />';
+		$loginBOX.= '<input type="submit" class="btn btn-xs btn-danger" value=" 登录 " />';
 		$loginBOX.= '</form>';
 		return $loginBOX;
 	}

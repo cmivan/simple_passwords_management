@@ -15,7 +15,7 @@
 |
 */
 
-$config['base_url']	= '/password/';
+$config['base_url']	= '/';
 
 
 /*

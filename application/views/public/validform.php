@@ -4,8 +4,8 @@
  */
 if(!empty($formTO))
 {
-  $tourl = $formTO->url;
-  $backurl = $formTO->backurl;
+  $tourl = $formTO['url'];
+  $backurl = $formTO['backurl'];
   if(!empty($tourl)){$tourl = site_url($tourl);}
   if(!empty($backurl)&&$backurl!=''&&$backurl!='null'){$backurl = site_url($backurl).reUrl('v=null');}
   if(!empty($formTO->editjs))
